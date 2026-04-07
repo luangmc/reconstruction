@@ -312,17 +312,19 @@ class utils:
             else:
                runlog='runlog_%s_auto.csv' % (options.tag)
                df = pd.read_csv('pedestals/%s'%runlog)
-               
-            dffilter = ((df["number_of_events"] >= 100) & (df["pedestal_run"] == 1) & (df["run_number"] <= run) & (df["HV_STATE"] == 0))
-            runkey = df.run_number[dffilter].values.tolist()[-1]
-            comment = df.run_description[dffilter].values.tolist()[-1]
-            nevents = df.number_of_events[dffilter].values.tolist()[-1]
-            options.pedrun = int(runkey)
-            if runkey:
-                print("Will use pedestal run %05d which has comment: '%s' and n of events: '%d'" % (int(runkey),comment,int(nevents)))
-            else:
-                print("Didn't find the pedestal corresponding to run %d in pedestals/%s. Check the csv runlog dump!" % (options.run, runlog))
-        setattr(options,'pedfile_fullres_name', 'pedestals/pedmap_run%s_rebin1.root' % (options.pedrun))        
+            flag = False
+            if flag:
+                dffilter = ((df["number_of_events"] >= 100) & (df["pedestal_run"] == 1) & (df["run_number"] <= run) & (df["HV_STATE"] == 0))
+                runkey = df.run_number[dffilter].values.tolist()[-1]
+                comment = df.run_description[dffilter].values.tolist()[-1]
+                nevents = df.number_of_events[dffilter].values.tolist()[-1]
+                options.pedrun = int(runkey)
+                if runkey:
+                    print("Will use pedestal run %05d which has comment: '%s' and n of events: '%d'" % (int(runkey),comment,int(nevents)))
+                else:
+                    print("Didn't find the pedestal corresponding to run %d in pedestals/%s. Check the csv runlog dump!" % (options.run, runlog))
+            options.pedrun = 107199 # 107199 59998
+        setattr(options,'pedfile_fullres_name', 'pedestals/pedmap_run%s_rebin1.root' % (options.pedrun))           
         
         
     def setPedestalRun(self,options):
@@ -349,7 +351,8 @@ class utils:
     
     def rootflip(self,rootfile,key,tag):
         #Necessary conversion from root format to numpy matrix oriented exactly as the output of midas files
-        img_fr = rootfile[key].values().T            #necessary because uproot inverts column and rows with x and y
+        # img_fr = rootfile[key].values().T            #necessary because uproot inverts column and rows with x and y
+        img_fr = rootfile[key].values() 
         if tag=='MAN':
             img_fr = img_fr[::-1]                  #necessary to uniform root raw data to midas. This is a vertical flip (raw data differ between ROOT and MIDAS formats)
         return img_fr
