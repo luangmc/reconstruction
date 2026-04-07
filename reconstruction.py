@@ -43,8 +43,8 @@ class analysis:
         self.rebin = options.rebin        
         self.options = options
         if options.camera_mode:
-            self.pedfile_fullres_name = 'pedestals/pedmap_run59998_rebin1.root' # fusion
-            # self.pedfile_fullres_name = 'pedestals/pedmap_run107199_rebin1.root' # quest
+            # self.pedfile_fullres_name = 'pedestals/pedmap_run59998_rebin1.root' # fusion
+            self.pedfile_fullres_name = 'pedestals/pedmap_run107199_rebin1.root' # quest
             # self.pedfile_fullres_name = options.pedfile_fullres_name
         self.tmpname = options.tmpname
         geometryPSet   = open('modules_config/geometry_{det}.txt'.format(det=options.geometry),'r')
