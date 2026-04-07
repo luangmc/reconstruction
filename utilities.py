@@ -323,7 +323,7 @@ class utils:
                     print("Will use pedestal run %05d which has comment: '%s' and n of events: '%d'" % (int(runkey),comment,int(nevents)))
                 else:
                     print("Didn't find the pedestal corresponding to run %d in pedestals/%s. Check the csv runlog dump!" % (options.run, runlog))
-            options.pedrun = 107199 # 107199 59998
+            options.pedrun = 59998 # 107199 59998
         setattr(options,'pedfile_fullres_name', 'pedestals/pedmap_run%s_rebin1.root' % (options.pedrun))           
         
         
