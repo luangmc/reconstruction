@@ -5,7 +5,7 @@
 'cameratype'       : 'Quest',
 'vignette'    : 'data/vignette_QEHD_085.root',
 'xmin'        : 450,
-'xmax'        : 5600,
+'xmax'        : 3600,
 'ymin'        : 0,
 'ymax'        : 2304,
 }
